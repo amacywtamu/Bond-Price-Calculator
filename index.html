@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bond Price Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="_assets/cob-brand.css" />
+</head>
+<body>
+  <div class="cob-brand">
+    <div class="cob-brand__inner">
+      <img
+        src="_assets/cob-seal.png"
+        srcset="_assets/cob-seal@2x.png 2x"
+        alt="West Texas A&M University Seal"
+        class="cob-brand__seal"
+      />
+      <div class="cob-brand__wordmark">
+        <div class="cob-brand__university">West Texas A&amp;M University</div>
+        <div class="cob-brand__college">Paul and Virginia Engler College of Business</div>
+      </div>
+    </div>
+    <div class="cob-brand__rule"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+      <h1>Bond Price Calculator</h1>
+      <p>Enter bond characteristics below to calculate the estimated bond price.</p>
+    </header>
+
+    <!-- Educational blurb -->
+    <div class="card">
+      <p class="card-title">How Bond Pricing Works</p>
+      <p class="edu-blurb">
+        A bond's price is the present value of its future cash flows. These cash flows include
+        the regular coupon payments and the repayment of face value at maturity. When the market
+        interest rate is higher than the coupon rate, the bond price is usually below face value.
+        When the market interest rate is lower than the coupon rate, the bond price is usually
+        above face value.
+      </p>
+    </div>
+
+    <!-- Error box -->
+    <div id="error-box" class="error-box" role="alert" aria-live="assertive">
+      <strong>Please fix the following:</strong>
+      <ul id="error-list"></ul>
+    </div>
+
+    <!-- Input form -->
+    <div class="card">
+      <p class="card-title">Bond Characteristics</p>
+      <form id="bond-form" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="face-value">Face Value</label>
+            <span class="field-desc">The amount the bond pays at maturity.</span>
+            <input
+              type="number"
+              id="face-value"
+              name="faceValue"
+              placeholder="e.g. 1000"
+              step="any"
+              min="0.01"
+              aria-describedby="face-value-desc"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="coupon-rate">Annual Coupon Rate (%)</label>
+            <span class="field-desc">The annual coupon rate paid by the bond.</span>
+            <input
+              type="number"
+              id="coupon-rate"
+              name="couponRate"
+              placeholder="e.g. 6"
+              step="any"
+              min="0"
+              aria-describedby="coupon-rate-desc"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="market-rate">Annual Market Interest Rate (%)</label>
+            <span class="field-desc">The required annual return used to discount the bond's cash flows.</span>
+            <input
+              type="number"
+              id="market-rate"
+              name="marketRate"
+              placeholder="e.g. 8"
+              step="any"
+              min="0"
+              aria-describedby="market-rate-desc"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="years">Years to Maturity</label>
+            <span class="field-desc">The number of years until the bond matures.</span>
+            <input
+              type="number"
+              id="years"
+              name="years"
+              placeholder="e.g. 10"
+              step="any"
+              min="0.01"
+              aria-describedby="years-desc"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="frequency">Compounding / Payment Frequency</label>
+            <span class="field-desc">How many times per year interest is compounded and coupon payments are made.</span>
+            <select id="frequency" name="frequency" aria-describedby="frequency-desc">
+              <option value="1">Annual &mdash; 1 time per year</option>
+              <option value="2" selected>Semiannual &mdash; 2 times per year</option>
+              <option value="4">Quarterly &mdash; 4 times per year</option>
+              <option value="12">Monthly &mdash; 12 times per year</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="button-row" style="margin-top: 24px;">
+          <button type="button" id="btn-calculate" class="btn btn-primary">Calculate Bond Price</button>
+          <button type="button" id="btn-reset" class="btn btn-secondary">Reset</button>
+          <button type="button" id="btn-example" class="btn btn-example">Load Example</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Results section -->
+    <section id="results-section" aria-live="polite" aria-label="Calculation Results">
+      <div class="card">
+        <p class="card-title">Results</p>
+        <table class="results-table" aria-label="Bond calculation breakdown">
+          <tbody>
+            <tr>
+              <td>Coupon Payment per Period</td>
+              <td id="res-coupon"></td>
+            </tr>
+            <tr>
+              <td>Interest Rate per Period</td>
+              <td id="res-rate"></td>
+            </tr>
+            <tr>
+              <td>Total Number of Periods</td>
+              <td id="res-periods"></td>
+            </tr>
+            <tr>
+              <td>Present Value of Coupon Payments</td>
+              <td id="res-pv-coupons"></td>
+            </tr>
+            <tr>
+              <td>Present Value of Face Value</td>
+              <td id="res-pv-face"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bond-price-box" aria-label="Bond Price">
+          <span class="bond-price-label">Bond Price</span>
+          <span class="bond-price-value" id="res-bond-price"></span>
+        </div>
+
+        <div id="price-status" class="price-status" aria-live="polite"></div>
+
+        <div class="button-row" style="margin-top: 20px;">
+          <button type="button" id="btn-copy" class="btn btn-copy">Copy Summary</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formula section -->
+    <div class="card">
+      <p class="card-title">Formula Reference</p>
+      <div class="formula-block" aria-label="Bond pricing formula">
+        <p>Bond Price = PV of Coupon Payments + PV of Face Value</p>
+        <p>&nbsp;</p>
+        <p>PV of Coupon Payments = Coupon Payment &times; [1 &minus; (1 + r)<sup>&minus;n</sup>] / r</p>
+        <p>PV of Face Value = Face Value / (1 + r)<sup>n</sup></p>
+        <p>&nbsp;</p>
+        <p>Where:</p>
+        <p>&nbsp;&nbsp;r = market interest rate per period</p>
+        <p>&nbsp;&nbsp;n = total number of periods</p>
+        <p>&nbsp;</p>
+        <p>Special case (r = 0%):</p>
+        <p>&nbsp;&nbsp;Bond Price = (Coupon Payment &times; n) + Face Value</p>
+      </div>
+    </div>
+
+  </div><!-- /page-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>
