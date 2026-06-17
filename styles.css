@@ -1,0 +1,346 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  background-color: #f4f6f8;
+  color: #222222;
+  line-height: 1.6;
+  padding: 24px 16px 48px;
+}
+
+.page-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+.page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f5f99;
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ── Cards / Panels ──────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f5f99;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e8f0;
+}
+
+/* ── Educational blurb ────────────────────────────────── */
+.edu-blurb {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+/* ── Error box ───────────────────────────────────────── */
+.error-box {
+  display: none;
+  background-color: #fdecea;
+  border: 1.5px solid #b00020;
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  color: #b00020;
+}
+
+.error-box.visible {
+  display: block;
+}
+
+.error-box strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.error-box ul {
+  padding-left: 20px;
+}
+
+.error-box li {
+  margin-bottom: 3px;
+  font-size: 0.95rem;
+}
+
+/* ── Form ────────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.form-group .field-desc {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: -2px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1.5px solid #cdd5df;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #222;
+  background: #fff;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #1f5f99;
+  box-shadow: 0 0 0 3px rgba(31, 95, 153, 0.12);
+}
+
+.form-group input.invalid,
+.form-group select.invalid {
+  border-color: #b00020;
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+.button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.btn {
+  padding: 11px 22px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary {
+  background-color: #1f5f99;
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #174a78;
+  box-shadow: 0 2px 8px rgba(31, 95, 153, 0.3);
+  outline: none;
+}
+
+.btn-secondary {
+  background-color: #e4eaf1;
+  color: #333;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #cdd5df;
+  outline: none;
+}
+
+.btn-example {
+  background-color: #f0f7e6;
+  color: #2d6a1e;
+  border: 1.5px solid #a5d68a;
+}
+
+.btn-example:hover,
+.btn-example:focus {
+  background-color: #dcefd0;
+  outline: none;
+}
+
+.btn-copy {
+  background-color: #f4f6f8;
+  color: #1f5f99;
+  border: 1.5px solid #1f5f99;
+}
+
+.btn-copy:hover,
+.btn-copy:focus {
+  background-color: #e8f4ff;
+  outline: none;
+}
+
+.btn-copy.copied {
+  background-color: #eaf7ea;
+  color: #1a5c1a;
+  border-color: #7dcc7d;
+}
+
+/* ── Results section ─────────────────────────────────── */
+#results-section {
+  display: none;
+}
+
+#results-section.visible {
+  display: block;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.results-table tr {
+  border-bottom: 1px solid #e8edf3;
+}
+
+.results-table tr:last-child {
+  border-bottom: none;
+}
+
+.results-table td {
+  padding: 10px 4px;
+}
+
+.results-table td:first-child {
+  color: #555;
+  font-weight: 500;
+  width: 60%;
+}
+
+.results-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Bond price highlight row */
+.bond-price-row td {
+  padding: 0;
+}
+
+.bond-price-box {
+  background-color: #e8f4ff;
+  border: 2px solid #1f5f99;
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.bond-price-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f5f99;
+}
+
+.bond-price-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f5f99;
+}
+
+/* Premium/discount badge */
+.price-status {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.price-status.discount {
+  background: #fff4e5;
+  color: #7a4700;
+  border: 1px solid #f5c97a;
+}
+
+.price-status.premium {
+  background: #eaf7ea;
+  color: #1a5c1a;
+  border: 1px solid #7dcc7d;
+}
+
+.price-status.par {
+  background: #f0f0f0;
+  color: #444;
+  border: 1px solid #ccc;
+}
+
+/* ── Formula section ─────────────────────────────────── */
+.formula-block {
+  background: #f8fafc;
+  border: 1px solid #dde5ef;
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 2;
+}
+
+.formula-block p {
+  margin: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 540px) {
+  .card {
+    padding: 20px 18px;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .bond-price-box {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
